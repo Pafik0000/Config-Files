@@ -2,24 +2,29 @@
 # see /usr/share/doc/zsh/examples/zshrc for examples
 
 
-# Make work VS Code 42C-Formatter extention
-export PATH="$PATH:/home/ipafnuto/.local/bin"
+# Custom aliases
 
 alias mk=make
 
-alias g-clone='git clone'
-alias g-status='git status'
+alias g-clone="git clone"
+alias g-status="git status"
 alias g-push="git push"
 alias g-pull="git pull"
 alias g-add-all="git add -A"
+alias g-commit-message="git commit -m"
 
-# Wallpaper
-WALLPAPER="/home/ipafnuto/Pictures/Wallpaper/ASCII/beach-invert"
-WALLPAPER_STYLE="\e[38;5;175;2m"
-WALLPAPER_MAX_LINES=25
-alias clear='echo -e $WALLPAPER_STYLE && clear && head --lines=$WALLPAPER_MAX_LINES $WALLPAPER && echo -e "\e[0m"'
+#alias tree="tree --dirsfirst"
+alias feh="feh --geometry 683x732+683+0 --scale-down --draw-filename --draw-tinted --borderless --image-bg black --quiet"
+alias batperc="acpi | cut -d ' ' -f 4 | tr -d ','"
 
-clear
+# Custom startup commands
+
+#clear
+echo ""
+#cat ~/Pictures/Wallpaper/ASCII/pivix0-80.txt
+
+# Adding cargo path (to make viu work)
+#export PATH=/home/ilya/.cargo/bin:$PATH
 
 
 setopt autocd              # change directory just by typing its name
@@ -113,10 +118,11 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 configure_prompt() {
-    prompt_symbol=☢
+    prompt_symbol=㉿
+	# ☢
 	# ㉿
-    # Skull emoji for root terminal
-    #[ "$EUID" -eq 0 ] && prompt_symbol=💀
+     # Skull emoji for root terminal
+    [ "$EUID" -eq 0 ] && prompt_symbol=💀
     case "$PROMPT_ALTERNATIVE" in
         twoline)
             PROMPT=$'%F{%(#.blue.green)}╭──${debian_chroot:+($debian_chroot)─}${VIRTUAL_ENV:+($(basename $VIRTUAL_ENV))─}(%B%F{%(#.red.blue)}%n'$prompt_symbol$'%m%b%F{%(#.blue.green)})-[%B%F{reset}%(6~.%-1~/…/%4~.%5~)%b%F{%(#.blue.green)}]\n╰─%B%(#.%F{red}#.%F{blue}$)%b%F{reset} '
@@ -278,3 +284,6 @@ fi
 if [ -f /etc/zsh_command_not_found ]; then
     . /etc/zsh_command_not_found
 fi
+
+# Created by `pipx` on 2025-02-19 14:12:52
+export PATH="$PATH:/home/ilya/.local/bin"
